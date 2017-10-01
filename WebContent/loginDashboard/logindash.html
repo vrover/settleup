@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myapp" ng-controller="headcontroller">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Area | Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+    .modal-title {
+    color:#000000;
+    background-color: #fff;
+    
+}
+#date {
+    color:#000000;
+    background-color: #fff;
+    font-size: 15px;}
+
+#billamt{
+color:#000000;
+    background-color: #fff;
+    font-size: 15px;
+  
+}    
+
+.imgContainer{
+    float:left;
+}
+.img2Container{
+    float:right;
+
+}
+body {
+    background-image: url("images.jpg");
+}
+    </style>
+
+  </head>
+
+  <body ng-init="onload()">
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Expense Tracker</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="logindash.html">Dashboard</a></li>
+            <li><a href="../home.html">Home</a></li>
+         
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-model="userdetail"><a href="#">Welcome, {{userdetail}}</a></li>
+            <li ng-model="logoutuser" ng-click="userlogout()" ><a href="/myproject/logout">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+   <header id="header" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <!--<h1><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Dashboard <small>Manage Your Account</small></h1>-->
+            <h1><img src="das.gif" alt="HTML5 Icon" style="width:40px;height:40px;">Dashboard <small>Create or Join Group</small></h1>
+          </div>
+
+          <div class="col-md-1">
+         <div class="dropdown create">
+              <button class="btn btn-primary " type="button"   data-toggle="modal" data-target="#popUpWindow" ><span  aria-hidden="true"></span>
+                Create Group
+                
+              </button>
+              
+              
+              <div class="modal fade" id="popUpWindow" aria-labelledby="popUpWindow">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header ">
+                    <button type="button" class="close" data-keyboard="false" data-backdrop="static" data-dismiss="modal" aria-haspopup="true" aria-expanded="false">&times;</button>
+                    <h3 class="modal-title ">Group Details</h3>
+                </div>
+
+                <!-- body (form) -->
+                <div class="modal-body">
+                    <form name="form" role="form">
+                        <div class="form-group"  >
+                            <input type="text" name="gpname" class="form-control" placeholder="Group Name" ng-model="gpname" required />
+                            <span ng-show="form.gpname.$dirty && form.gpname.$error.required" class="help-block">Group name required</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- button -->
+                <div class="modal-footer"  >
+              <!--<button class="btn btn-primary"   for="{{ item.id }}" value="okay" ng-click="myFunction()" >click</button>-->
+              <input type="button" class="btn btn-primary"  data-dismiss="modal" ng-disabled="form.$invalid"  value="Submit" ng-click="creategroup()" />
+                </div>
+            </div>
+        </div>
+    </div>  
+            </div>
+
+      </div>
+
+           
+    </header>
+
+    <section id="main" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Dashboard
+              </a>
+             
+              <a href="#d" data-toggle="collapse" class="list-group-item"><span ng-model="head" class="glyphicon glyphicon-user" aria-hidden="true"></span> Head of  <span class="badge">{{head}}</span></a>
+             <div id="d" class="panel-collapse collapse">
+            <ul class="list-group">
+            <li ng-model="headname" ng-repeat="x in hdropnames" ng-click="headof(x)">
+            <a href="/myproject/o/index.html" class="list-group-item"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>{{x}} </a>
+            </li>
+            </ul>
+          </div>
+              <a href="#demo" data-toggle="collapse" class="list-group-item"><span  ng-model="member" class="glyphicon glyphicon-user" aria-hidden="true"></span> Member of <span class="badge">{{member}}</span></a>
+            
+            <div id="demo" class="panel-collapse collapse">
+            <ul class="list-group">
+            <li ng-model="membername" ng-repeat="y in mdropnames" ng-click="memberof(y)">
+            <a href="/myproject/member Dashboard/mdash.html" class="list-group-item"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>{{y}}</a>
+            </li>
+            </ul>
+          </div>
+          <a href="join.html" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Join Group </a>
+          </div>
+          </div >
+
+          <div class="col-md-9">
+            <!-- Website Overview -->
+            <div class="panel panel-default">
+              </div>
+
+               <img src="img3.jpg"  height="300" width="900"><br><br>
+               <div  class="col-md-12" >
+               <div class="imgContainer" class="col-md-5">
+                <img src="img1.jpg"  height="250" width="400"> </div>
+                <div class="img2Container" class="col-md-6" >
+                <img src="img2.png"  height="250" width="400">
+                </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+  </body>
+</html>
+<script>
+        var ap =angular.module("myapp",[]);
+        ap.controller("headcontroller",['$scope','$http','$window',function($scope,$http,$window){
+
+
+            $scope.onload=function(){
+         	   
+          		//$window.href="https://localhost:8080/myproject/index.html";
+          		   $http({
+          	           url : '/myproject/afterLogin',
+          	           method : "GET",
+          	          
+          	       }).success(function(data, status, headers, config) {
+          	    	   
+          	    	   $scope.userdetail=data.name;
+          	    	  
+          	    	  $scope.activegroup=data.groups;
+          	    	  $scope.hdropnames=data.headofgroup;
+          	    	$scope.mdropnames=data.memberofgroup;
+          	  	  
+          			}).error(function(data, status, headers, config) {
+          			});  
+          		   
+          	   };
+          	   
+          	  
+        	
+        
+         
+     
+          	 $scope.creategroup=function()
+             {
+            	  $http({
+                      url : '/myproject/createGroup',
+                      method : "POST",
+                      data : {
+                   	   
+                        
+                         'gpname': $scope.gpname
+                      }
+                  }).success(function(data, status, headers, config) {
+        	    	  if(data=="verified"){
+          	    		$window.alert("Request Send !!")
+          	    	  }
+          	  	  
+          			}).error(function(data, status, headers, config) {
+          			});  
+          		   
+             };
+        
+
+
+        }]);
+        
+        
+    </script>
+
+    

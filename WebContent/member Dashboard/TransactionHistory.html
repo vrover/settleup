@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Area | Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="http://cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <style type="text/css">
+    .modal-title {
+    color:#000000;
+    background-color: #fff;
+    
+}
+#date {
+    color:#000000;
+    background-color: #fff;
+    font-size: 15px;}
+
+#billamt{
+color:#000000;
+    background-color: #fff;
+    font-size: 15px;
+  
+}    
+
+
+    </style>
+
+  </head>
+
+  <body ng-app="myapp" ng-controller="transactioncontroller">
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Expense Tracker</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Dashboard</a></li>
+            <li><a href="pages.html">Home</a></li>
+          <!--  <li><a href="posts.html">Posts</a></li>
+            <li><a href="users.html">Users</a></li>-->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Welcome, {{userdetail}}</a></li>
+            <li><a href="file:///C:/xampp/htdocs/angularLogin/homepage/home.html">Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<header id="header" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h1><img src="das.gif" alt="HTML5 Icon" style="width:40px;height:40px;">Dashboard <small>Manage Your Account</small></h1>
+          </div>
+
+          <div class="col-md-1">
+         <div class="dropdown create">
+              <button class="btn btn-primary " type="button"   data-toggle="modal" data-target="#popUpWindow"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                Add Bill
+                
+              </button>
+              <!--<ul class="dropdown-menu" aria-labelledby="popUpWindow">-->
+              
+              <div class="modal fade" id="popUpWindow" aria-labelledby="popUpWindow">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header ">
+                    <button type="button" class="close" data-keyboard="false" data-backdrop="static" data-dismiss="modal" aria-haspopup="true" aria-expanded="false">&times;</button>
+                    <h3 class="modal-title " id="billamt"> Billing Details</h3>
+                </div>
+
+                <!-- body (form) -->
+                <div class="modal-body">
+                    <form name="form" role="form">
+                        <div class="form-group"  >
+                            <input type="text" name="purpose" class="form-control" placeholder="Purpose" ng-model="purpose" required />
+                            <span ng-show="form.purpose.$dirty && form.purpose.$error.required" class="help-block">Purpose required</span>
+                        </div>
+                       
+                        <div >
+                            <input type="number" name="Amount"  class="form-control" placeholder="Amount" ng-model="amount" required />
+                            <span ng-show="form.Amount.$dirty && form.Amount.$error.required" class="help-block"> Amount required</span>
+                        </div>
+                        
+                        
+                        
+                       
+    
+        <div class="row">
+  <div class="col-lg-6">
+  <label id="billamt"> Enter User ID:</label>
+  <input type="text"  class="form-control" aria-label="..." placeholder="user Id"" ng-model="userid" name="userid" required/>
+  <span ng-show="form.userid.$dirty && form.userid.$error.required" class="help-block">UserID required</span>
+    
+  </div>
+
+<div class="col-lg-6">
+<div id="date">
+  <label class="control-label" for="date">Date:-</label><input type="date" class="form-control" aria-label="..." class="datepicker" data-date-format="mm/dd/yyyy" ng-model="date" >
+  
+</div>
+</div>
+</div>
+
+                    </form>
+                </div>
+
+                <!-- button -->
+                <div class="modal-footer"  >
+              <!--<button class="btn btn-primary"   for="{{ item.id }}" value="okay" ng-click="myFunction()" >click</button>-->
+              <input type="button" class="btn btn-primary"  ng-disabled="form.$invalid"  value="okay" ng-click="insertbill()" />
+                </div>
+            </div>
+        </div>
+    </div>  
+            </div>
+
+      </div>
+
+     
+
+       
+              <div class="col-md-2">
+         <div class="dropdown create">
+              <button class="btn btn-primary " type="button"   data-toggle="modal" data-target="#popUpWindow2"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                Transfer
+                
+              </button>
+              <!--<ul class="dropdown-menu" aria-labelledby="popUpWindow">-->
+              
+              <div class="modal fade" id="popUpWindow2" aria-labelledby="popUpWindow2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header ">
+                    <button type="button" class="close" data-keyboard="false" data-backdrop="static" data-dismiss="modal" aria-haspopup="true" aria-expanded="false">&times;</button>
+                    <h3 class="modal-title ">Payment Details</h3>
+                </div>
+
+                <!-- body (form) -->
+                <div class="modal-body">
+                    <form name="form1" role="form">
+                        
+                       
+                        <div >
+                            <input type="number" name="Amount"  class="form-control" placeholder="Amount" ng-model="amountpay" required />
+                            <span ng-show="form1.Amount.$dirty && form1.Amount.$error.required" class="help-block"> Amount required</span>
+                        </div>
+                        
+                        
+                        
+                       
+    
+        <div class="row">
+  <div class="col-lg-6">
+  <label id="billamt"> Enter User ID:</label>
+  <input type="text"  class="form-control" aria-label="..." placeholder="user Id"" ng-model="useridpay" name="useridpay" required/>
+  <span ng-show="form1.useridpay.$dirty && form1.useridpay.$error.required" class="help-block">UserID required</span>
+    
+  </div>
+
+<div class="col-lg-6">
+<div id="date">
+  <label class="control-label" for="date">Date:-</label><input type="date" class="form-control" aria-label="..." class="datepicker" data-date-format="mm/dd/yyyy" ng-model="date" >
+  
+</div>
+</div>
+</div>
+
+                    </form>
+                </div>
+
+                <!-- button -->
+                <div class="modal-footer"  >
+              <!--<button class="btn btn-primary"   for="{{ item.id }}" value="okay" ng-click="myFunction()" >click</button>-->
+              <input type="button" class="btn btn-primary"  ng-disabled="form1.$invalid"  value="okay" ng-click="paybill()" />
+                </div>
+            </div>
+        </div>
+    </div>  
+            </div>
+
+      </div>
+
+           <div class="col-md-1">
+         <div class="dropdown create">
+              <button class="btn btn-primary"  class="glyphicon glyphicon-remove-sign" data-toggle="modal"  ng-confirm-click="Are you sure to leave this Group ?" confirmed-click="removeUser($index)"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                Leave
+                </button>
+                </div>
+      </div>
+    </header>
+
+    <section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="list-group">
+              <a href="index.html" class="list-group-item active main-color-bg">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Dashboard
+              </a>
+              
+             <a href="#" class="list-group-item"><span ng-model="lend" class="glyphicon glyphicon-export" aria-hidden="true"></span> Lend <span class="badge">{{lend}}</span></a>
+              <a href="#" class="list-group-item"><span ng-model="debt" class="glyphicon glyphicon-import" aria-hidden="true"></span> Debt <span class="badge">{{debt}}</span></a>
+            <a href="#" class="list-group-item"><i class="fa fa-rupee" style="font-size:24px; color:red"></i><span ng-model="balance" ></span> Net Balance <span class="badge">{{balance}}</span></a>
+              <a href="#demo" data-toggle="collapse" class="list-group-item"><span   class="glyphicon glyphicon-transfer" aria-hidden="true" ></span> Transaction History <span class="badge">0</span></a>
+
+              <div id="demo" class="panel-collapse collapse">
+               <ul class="list-group">
+              
+              <li ng-repeat="p in dropnames" ng-model="name" ng-click="nextpage()">
+              <!--<a href="TransactionHistory.html" class="list-group-item"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> {{p}} <span class="badge"></span></a>-->
+
+                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> {{p}} <span class="badge"></span></a>
+              </li>
+              </ul>
+              </div>
+
+              
+
+            </div>
+
+          </div>
+
+          
+              <div class="col-md-9"> 
+              <div class="panel panel-default">
+                <div class="panel-heading main-color-bg">
+                  <h3 class="panel-title">Transaction History</h3>
+                </div>
+                <div class="panel-body">
+
+                  <table class="table table-striped table-hover">
+                      <tr>
+                        <th> Name</th>
+                        <th> Amount Paid</th>
+                        <th> Amount Received</th>
+                        <th> Balance Amount</th>
+                        <th>Loan Reminder</th>
+
+
+
+                      </tr>
+                      <tr ng-repeat="x in groupname">
+                        
+                        <td >{{x.id}}</td>
+                        <td >{{Payable[$index].id}}</td>
+                        <td >{{Receivable[$index].id}}</td>
+                        <td> {{Receivable[$index].id-Payable[$index].id}}</td>
+                        <td><button class="btn btn-success" ng-click="reminder()">Reminder</button></td>
+                      </tr>
+                    
+                    </table>
+                </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+<script type="text/javascript" src="angularjs-dropdown-multiselect.js"></script>.
+  </body>
+</html>
+<script>
+        var ap =angular.module("myapp",[]);
+        ap.controller("transactioncontroller",function($scope,$http,$window){
+
+
+
+
+
+          $scope.userdetail='Shashank & deo';         
+          $scope.lend='159';
+          $scope.debt='195'
+          $scope.balance='153'
+        
+
+     
+          $scope.dropnames = ["Licky", "Deo", "Shashank","Piyush"];
+
+         $scope.groupname=[{"id":'Deo'},{"id":'Shashank'},{"id": 'Licky'},{"id":'Varshant'}]
+
+        //$scope.Payable = ["Licky", "Deo", "Shashank","Piyush","Varshant","Jatin"];
+        $scope.Payable=[{"id":'123'},{"id":'256'},{"id": '1456'},{"id":'156'}]
+       $scope.Receivable=[{"id":'150'},{"id":'228'},{"id": '145'},{"id":'1562'}]
+        
+       
+    
+      $scope.insertbill = function() {          
+};
+
+      $scope.insertbill = function() {          
+};
+
+     
+      $scope.nextpage = function() {
+
+    $window.location='TransactionHistory.html'
+  
+            
+};
+$scope.loanreminder = function() {
+
+    $window.alert('loan reminder') ; 
+  }
+  $scope.reminder = function() {
+
+    $window.alert('Pay balance or else I will  kick you out') ; }
+
+
+        });
+        ap.directive('ngConfirmClick', [
+    function(){
+        return {
+            link: function (scope, element, attr) {
+                var msg = attr.ngConfirmClick || "Are you sure?";
+                var clickAction = attr.confirmedClick;
+                element.bind('click',function (event) {
+                    if ( window.confirm(msg) ) {
+                        scope.$eval(clickAction)
+                    }
+                });
+            }
+        };
+}])
+        
+    </script>
+
